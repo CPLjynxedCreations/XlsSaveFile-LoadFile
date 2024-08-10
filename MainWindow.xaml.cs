@@ -22,6 +22,11 @@ namespace XlsSaveFile
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int productAmounts = 51;
+        private string itemToChange = "10";
+        //will be set after button click item number = row number
+        string productXLS = "A";
+        string priceXLS = "B";
 
         public MainWindow()
         {
@@ -30,10 +35,8 @@ namespace XlsSaveFile
             {
                 var worksheet = workbook.Worksheets.Add("Product Sheet");
 
-                for (int i = 1; i <= 10; i++)
+                for (int i = 1; i <= productAmounts; i++)
                 {
-                    string productXLS = "A";
-                    string priceXLS = "B";
                     worksheet.Cell(productXLS + i).Value = "EmptyItem" + i;
                     worksheet.Column(productXLS).AdjustToContents();
                     worksheet.Cell(priceXLS + i).Value = "0";
@@ -41,16 +44,12 @@ namespace XlsSaveFile
                 }
                 workbook.SaveAs("ProductTest.xlsx");
             }
+
             var workBook = new XLWorkbook("ProductTest.xlsx");
             var workSheet = workBook.Worksheet("Product Sheet");
-            //var ws1 = wbook.Worksheet(1);
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= productAmounts; i++)
             {
-                string productXLS = "A";
                 var data = workSheet.Cell(productXLS + i).GetValue<string>();
-                //Debug.WriteLine(data);
-
-
                 string setLabel = "lbl" + i;
                 foreach (UIElement item in grTest.Children)
                 {
@@ -64,6 +63,8 @@ namespace XlsSaveFile
                     }
                 }
             }
+            workSheet.Cell(productXLS + itemToChange).Value = "New Item";
+            workBook.Save();
         }
 
     }
