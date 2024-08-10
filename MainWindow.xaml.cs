@@ -25,7 +25,6 @@ namespace XlsSaveFile
         private int productAmounts = 51;
         //private string itemToChange;
         private int itemToChange;
-        //will be set after button click item number = row number
         string productXLS = "A";
         string priceXLS = "B";
         string itemName;
@@ -72,6 +71,13 @@ namespace XlsSaveFile
 
             //workSheet.Cell(productXLS + itemToChange).Value = "New Item";
             //workBook.Save();
+            //dont forget to save
+        }
+        private void test_Click(Object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            var pressedName = Convert.ToString(btn.Name);
+            Debug.WriteLine(pressedName);
         }
 
         private void btn1_Click(object sender, RoutedEventArgs e)
@@ -93,7 +99,6 @@ namespace XlsSaveFile
             workSheet.Cell("A2").Value = "Burger";
             var btnName = "btn";
             var data = workSheet.Cell("A" + itemToChange).GetValue<string>();
-            
             for (int i = 1; i <= productAmounts; i++)
             {
                 if (itemToChange == i)
