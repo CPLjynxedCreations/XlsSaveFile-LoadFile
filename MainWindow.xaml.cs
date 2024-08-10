@@ -47,6 +47,8 @@ namespace XlsSaveFile
 
             var workBook = new XLWorkbook("ProductTest.xlsx");
             var workSheet = workBook.Worksheet("Product Sheet");
+            //workSheet.Cell(productXLS + itemToChange).Value = "New Item";
+            //workBook.Save();
             for (int i = 1; i <= productAmounts; i++)
             {
                 var data = workSheet.Cell(productXLS + i).GetValue<string>();
@@ -63,8 +65,8 @@ namespace XlsSaveFile
                     }
                 }
             }
-            workSheet.Cell(productXLS + itemToChange).Value = "New Item";
-            workBook.Save();
+            //workSheet.Cell(productXLS + itemToChange).Value = "New Item";
+            //workBook.Save();
         }
 
     }
