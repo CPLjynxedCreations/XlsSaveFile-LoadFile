@@ -23,14 +23,17 @@ namespace XlsSaveFile
     public partial class MainWindow : Window
     {
         private int productAmounts = 51;
-        private string itemToChange = "10";
+        //private string itemToChange;
+        private int itemToChange;
         //will be set after button click item number = row number
         string productXLS = "A";
         string priceXLS = "B";
+        string itemName;
 
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Product Sheet");
@@ -65,10 +68,51 @@ namespace XlsSaveFile
                     }
                 }
             }
+
+
             //workSheet.Cell(productXLS + itemToChange).Value = "New Item";
             //workBook.Save();
         }
 
+        private void btn1_Click(object sender, RoutedEventArgs e)
+        {
+            itemToChange = 1;
+            SetProduct();
+        }
+
+        private void btn2_Click(object sender, RoutedEventArgs e)
+        {
+            itemToChange = 2;
+            SetProduct();
+        }
+        private void SetProduct()
+        {
+            var workBook = new XLWorkbook("ProductTest.xlsx");
+            var workSheet = workBook.Worksheet("Product Sheet");
+            workSheet.Cell("A1").Value = "Pizza";
+            workSheet.Cell("A2").Value = "Burger";
+            var btnName = "btn";
+            var data = workSheet.Cell("A" + itemToChange).GetValue<string>();
+            
+            for (int i = 1; i <= productAmounts; i++)
+            {
+                if (itemToChange == i)
+                {
+                    btnName = btnName + i;
+                    foreach (UIElement item in grTest.Children)
+                    {
+                        if (item.GetType() == typeof(Button))
+                        {
+                            Button newButton = (Button)item;
+                            if (newButton.Name == btnName)
+                            {
+                                newButton.Content = data;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

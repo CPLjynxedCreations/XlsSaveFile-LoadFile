@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="grTest">
+        <Button x:Name="btn1" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn1_Click"/>
+        <Button x:Name="btn2" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,120,0,0" Click="btn2_Click"/>
         <TextBlock x:Name="lbl1" TextWrapping="Wrap" Text="TextBlock" Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBlock x:Name="lbl2" TextWrapping="Wrap" Text="TextBlock" Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,30,0,0"/>
         <TextBlock x:Name="lbl3" TextWrapping="Wrap" Text="TextBlock" Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,60,0,0"/>
