@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation.Text;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -14,6 +15,7 @@ using ClosedXML;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.VariantTypes;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace XlsSaveFile
 {
@@ -39,7 +41,11 @@ namespace XlsSaveFile
 
                 for (int i = 1; i <= productAmounts; i++)
                 {
-                    worksheet.Cell(productXLS + i).Value = "EmptyItem" + i;
+                    string txt = "EmptyItem";
+                    txt = txt.ToUpper();
+                    worksheet.Cell(productXLS + i).Value = txt + i;
+                    //worksheet.Cell(productXLS + i).Value = "EmptyItem" + i;
+                    worksheet.Cell(productXLS + i).GetRichText().Text.ToUpper();
                     worksheet.Column(productXLS).AdjustToContents();
                     worksheet.Cell(priceXLS + i).Value = "0";
                     worksheet.Cell(priceXLS + i).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
@@ -67,6 +73,9 @@ namespace XlsSaveFile
                     }
                 }
             }
+            //Gets last row of text
+            //int row = workSheet.LastRowUsed().RowNumber();
+            //Debug.WriteLine(row);
 
 
             //workSheet.Cell(productXLS + itemToChange).Value = "New Item";
