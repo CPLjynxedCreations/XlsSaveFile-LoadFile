@@ -37,20 +37,22 @@ namespace XlsSaveFile
             this.DataContext = this;
             using (var workbook = new XLWorkbook())
             {
-                var worksheet = workbook.Worksheets.Add("Product Sheet");
-
-                for (int i = 1; i <= productAmounts; i++)
+                if (!File.Exists("ProductTest.xlsx"))
                 {
-                    string txt = "EmptyItem";
-                    txt = txt.ToUpper();
-                    worksheet.Cell(productXLS + i).Value = txt + i;
-                    //worksheet.Cell(productXLS + i).Value = "EmptyItem" + i;
-                    worksheet.Cell(productXLS + i).GetRichText().Text.ToUpper();
-                    worksheet.Column(productXLS).AdjustToContents();
-                    worksheet.Cell(priceXLS + i).Value = "0";
-                    worksheet.Cell(priceXLS + i).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    var worksheet = workbook.Worksheets.Add("Product Sheet");
+
+                    for (int i = 1; i <= productAmounts; i++)
+                    {
+                        string txt = "EmptyItem";
+                        txt = txt.ToUpper();
+                        worksheet.Cell(productXLS + i).Value = txt + i;
+                        worksheet.Cell(productXLS + i).GetRichText().Text.ToUpper();
+                        worksheet.Column(productXLS).AdjustToContents();
+                        worksheet.Cell(priceXLS + i).Value = "0";
+                        worksheet.Cell(priceXLS + i).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Right;
+                    }
+                    workbook.SaveAs("ProductTest.xlsx");
                 }
-                workbook.SaveAs("ProductTest.xlsx");
             }
 
             var workBook = new XLWorkbook("ProductTest.xlsx");
